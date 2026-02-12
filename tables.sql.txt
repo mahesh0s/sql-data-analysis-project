@@ -1,0 +1,79 @@
+-- ===============================
+-- CREATE DEPARTMENT TABLE
+-- ===============================
+create table departments(
+dept_id int primary key,
+dept_name varchar(50)
+);
+
+insert into departments values
+(101,'IT'),
+(102,'HR'),
+(103,'Finance'),
+(104,'Sales'),
+(105,'Support');
+
+-- ===============================
+-- CREATE EMPLOYEES TABLE
+-- ===============================
+create table employees(
+emp_id int primary key,
+emp_name varchar(50),
+dept_id int,
+salary int,
+city varchar(50),
+join_date date,
+foreign key (dept_id) references departments(dept_id)
+);
+
+insert into employees values
+(1,'Ravi',101,35000,'Hyderabad','2022-01-10'),
+(2,'Sita',102,42000,'Chennai','2021-03-15'),
+(3,'John',101,28000,'Bangalore','2023-07-20'),
+(4,'Meena',103,52000,'Hyderabad','2020-11-05'),
+(5,'Rahul',104,30000,'Chennai','2022-06-18'),
+(6,'David',105,26000,'Bangalore','2023-02-12'),
+(7,'Kiran',101,47000,'Hyderabad','2021-09-25'),
+(8,'Pooja',102,39000,'Chennai','2022-04-30'),
+(9,'Arjun',104,33000,'Bangalore','2020-12-11'),
+(10,'Sneha',103,55000,'Hyderabad','2019-08-19');
+
+-- ===============================
+-- CREATE CUSTOMERS TABLE
+-- ===============================
+create table customers(
+customer_id int primary key,
+customer_name varchar(50),
+city varchar(50)
+);
+
+insert into customers values
+(201,'Mahesh','Hyderabad'),
+(202,'Anil','Chennai'),
+(203,'Robert','Bangalore'),
+(204,'Priya','Hyderabad'),
+(205,'Kavya','Chennai'),
+(206,'Ramesh','Bangalore');
+
+-- ===============================
+-- CREATE ORDERS TABLE
+-- ===============================
+create table orders(
+order_id int primary key,
+customer_id int,
+order_date date,
+amount int,
+foreign key (customer_id) references customers(customer_id)
+);
+
+insert into orders values
+(1001,201,'2024-01-10',5000),
+(1002,202,'2024-01-12',7000),
+(1003,203,'2024-01-15',6500),
+(1004,204,'2024-02-01',8000),
+(1005,205,'2024-02-10',9000),
+(1006,206,'2024-02-18',7500),
+(1007,201,'2024-03-05',8200),
+(1008,202,'2024-03-15',9100),
+(1009,203,'2024-03-20',7200),
+(1010,204,'2024-03-28',8800);

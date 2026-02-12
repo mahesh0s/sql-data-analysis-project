@@ -1,0 +1,69 @@
+🔹 1. Employee with department name (JOIN)
+select e.emp_id,e.emp_name,d.dept_name,e.salary,e.city
+from employees e
+join departments d
+on e.dept_id=d.dept_id;
+
+🔹 2. Total salary by department
+select d.dept_name, sum(e.salary) as total_salary
+from employees e
+join departments d
+on e.dept_id=d.dept_id
+group by d.dept_name
+order by total_salary desc;
+
+🔹 3. Highest salary employee
+select *
+from employees
+where salary=(select max(salary) from employees);
+
+🔹 4. Second highest salary
+select max(salary) as second_highest
+from employees
+where salary < (select max(salary) from employees);
+
+🔹 5. Department wise employee count
+select d.dept_name, count(e.emp_id) as total_employees
+from employees e
+join departments d
+on e.dept_id=d.dept_id
+group by d.dept_name;
+
+🔹 6. Employees earning above average salary
+select emp_name,salary
+from employees
+where salary > (select avg(salary) from employees);
+
+🔹 7. City wise highest salary
+select city, max(salary) as highest_salary
+from employees
+group by city;
+
+🔹 8. Total order amount by customer
+select c.customer_name, sum(o.amount) as total_spent
+from customers c
+join orders o
+on c.customer_id=o.customer_id
+group by c.customer_name
+order by total_spent desc;
+
+🔹 9. Customer who spent highest amount
+select c.customer_name, sum(o.amount) as total_spent
+from customers c
+join orders o
+on c.customer_id=o.customer_id
+group by c.customer_name
+having sum(o.amount)=(
+    select max(total_spent) from (
+        select sum(amount) as total_spent
+        from orders
+        group by customer_id
+    ) as temp
+);
+
+🔹 10. Monthly sales report
+select month(order_date) as month, sum(amount) as total_sales
+from orders
+group by month(order_date)
+order by month;
+
